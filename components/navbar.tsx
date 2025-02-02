@@ -19,7 +19,7 @@ import NextLink from "next/link";
 import clsx from "clsx";
 
 import {siteConfig} from "../config/site";
-import {ThemeSwitch} from "../components/theme-switch";
+import {ThemeSwitch} from "../components/Theme-switch";
 import {GithubIcon, SearchIcon, Logo} from "../components/Icons";
 
 const BRAND_NAME = "Briefly";
@@ -90,20 +90,20 @@ export const Navbar = () => {
                 </NavbarItem>
 
                 {/* Champ de recherche (visible en large screen) */}
-                <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+                {/*<NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>*/}
 
-                {/* Exemple : Un bouton d’action. Vous pouvez le renommer "Nouveau CR", "Déconnexion", etc. */}
-                <NavbarItem className="hidden md:flex">
-                    <Button
-                        className="text-sm font-normal text-default-600 bg-default-100"
-                        variant="flat"
-                        as={Link}
-                        // Exemple : "Nouveau compte-rendu" ou "/logout", etc.
-                        href="/"
-                    >
-                        Nouveau CR
-                    </Button>
-                </NavbarItem>
+                {/*/!* Exemple : Un bouton d’action. Vous pouvez le renommer "Nouveau CR", "Déconnexion", etc. *!/*/}
+                {/*<NavbarItem className="hidden md:flex">*/}
+                {/*    <Button*/}
+                {/*        className="text-sm font-normal text-default-600 bg-default-100"*/}
+                {/*        variant="flat"*/}
+                {/*        as={Link}*/}
+                {/*        // Exemple : "Nouveau compte-rendu" ou "/logout", etc.*/}
+                {/*        href="/"*/}
+                {/*    >*/}
+                {/*        Nouveau CR*/}
+                {/*    </Button>*/}
+                {/*</NavbarItem>*/}
             </NavbarContent>
 
             {/* ----- Section mobile ----- */}
