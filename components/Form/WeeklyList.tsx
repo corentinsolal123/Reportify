@@ -181,7 +181,7 @@ const WeeklyList: FC = () => {
                             updatedRows[index].tasks = tasks;
                             setRows(updatedRows);
                         }} />
-
+                        <Divider/>
                         {/* Liste des opinions */}
                         <WeeklyOpinionList opinions={row.opinions} setOpinions={(opinions) => {
                             const updatedRows = [...rows];

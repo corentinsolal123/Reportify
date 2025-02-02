@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Card, CardBody, Input, Textarea, Button } from "@heroui/react";
+import { Accordion, AccordionItem, Input, Textarea, Button } from "@heroui/react";
 import { PlusIcon, MinusIcon } from "@/components/Icons";
 
 interface Task {
@@ -30,39 +30,39 @@ const WeeklyTaskList: FC<WeeklyTaskListProps> = ({ tasks, setTasks }) => {
     };
 
     return (
-        <div className="space-y-2 w-full">
-            <h2>Tasks</h2>
+        <Accordion variant="splitted">
             {tasks.map((task, index) => (
-                <div key={index} className="flex flex-row items-center gap-4 w-full">
-                    <Input
-                        label="Task Name"
-                        className="w-full md:max-w-sm"
-                        value={task.taskName}
-                        onChange={(e) => handleTaskChange(index, "taskName", e.target.value)}
-                    />
-                    <Textarea
-                        label="Observation"
-                        className="w-full"
-                        value={task.taskObservation}
-                        onChange={(e) => handleTaskChange(index, "taskObservation", e.target.value)}
-                    />
+                <AccordionItem key={`task-${index}`} title={`Tâche ${index + 1}`}>
                     <div className="flex flex-col gap-4">
-                        <Button isIconOnly color="success" onPress={handleAddTask}>
-                            <PlusIcon />
-                        </Button>
-
-                        <Button
-                            isIconOnly
-                            color={tasks.length === 1 ? "default" : "danger"}
-                            disabled={tasks.length === 1}
-                            onPress={() => handleRemoveTask(index)}
-                        >
-                            <MinusIcon />
-                        </Button>
+                        <Input
+                            label="Nom de la tâche"
+                            className="w-full"
+                            value={task.taskName}
+                            onChange={(e) => handleTaskChange(index, "taskName", e.target.value)}
+                        />
+                        <Textarea
+                            label="Observation"
+                            className="w-full"
+                            value={task.taskObservation}
+                            onChange={(e) => handleTaskChange(index, "taskObservation", e.target.value)}
+                        />
+                        <div className="flex gap-2">
+                            <Button isIconOnly color="success" onPress={handleAddTask}>
+                                <PlusIcon />
+                            </Button>
+                            <Button
+                                isIconOnly
+                                color={tasks.length === 1 ? "default" : "danger"}
+                                disabled={tasks.length === 1}
+                                onPress={() => handleRemoveTask(index)}
+                            >
+                                <MinusIcon />
+                            </Button>
+                        </div>
                     </div>
-                </div>
+                </AccordionItem>
             ))}
-        </div>
+        </Accordion>
     );
 };
 

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Select, SelectItem, Textarea } from "@heroui/react";
+import { Accordion, AccordionItem, Select, SelectItem, Textarea } from "@heroui/react";
 
 interface Opinion {
     opinionResult: "" | "mauvais" | "a ameliorer" | "bon";
@@ -22,8 +22,7 @@ const WeeklyOpinionList: FC<WeeklyOpinionListProps> = ({ opinions, setOpinions }
         setOpinions(updatedOpinions);
     };
 
-    // 🎨 Fonction pour obtenir la couleur correcte
-    const getColorForOpinion = (opinion: "" | "mauvais" | "a ameliorer" | "bon"): "default" | "primary" | "secondary" | "success" | "warning" | "danger" => {
+    const getColorForOpinion = (opinion: "" | "mauvais" | "a ameliorer" | "bon"): "default" | "success" | "warning" | "danger" => {
         // @ts-ignore
         return {
             "mauvais": "danger",
@@ -34,33 +33,34 @@ const WeeklyOpinionList: FC<WeeklyOpinionListProps> = ({ opinions, setOpinions }
     };
 
     return (
-        <div className="space-y-2 w-full">
-            <h2>Opinions</h2>
+        <Accordion variant="splitted">
             {opinions.map((opinion, index) => (
-                <div key={opinion.opinionContext} className="flex flex-row items-center gap-4 w-full">
-                    <Select
-                        label={opinion.opinionContext}
-                        className="w-full md:max-w-xs"
-                        color={getColorForOpinion(opinion.opinionResult)} // ✅ Applique la bonne couleur
-                        value={opinion.opinionResult}
-                        onChange={(e) =>
-                            handleOpinionChange(index, "opinionResult", e.target.value as "mauvais" | "a ameliorer" | "bon")
-                        }
-                    >
-                        <SelectItem key="mauvais" value="mauvais">❌ Mauvais</SelectItem>
-                        <SelectItem key="a ameliorer" value="a ameliorer">⚠️ A ameliorer</SelectItem>
-                        <SelectItem key="bon" value="bon">✅ Bon</SelectItem>
-                    </Select>
+                <AccordionItem key={`opinion-${index}`} title={opinion.opinionContext}>
+                    <div className="flex flex-col gap-4">
+                        <Select
+                            label="Évaluation"
+                            className="w-full"
+                            color={getColorForOpinion(opinion.opinionResult)}
+                            value={opinion.opinionResult}
+                            onChange={(e) =>
+                                handleOpinionChange(index, "opinionResult", e.target.value as "mauvais" | "a ameliorer" | "bon")
+                            }
+                        >
+                            <SelectItem key="mauvais" value="mauvais">❌ Mauvais</SelectItem>
+                            <SelectItem key="a ameliorer" value="a ameliorer">⚠️ À améliorer</SelectItem>
+                            <SelectItem key="bon" value="bon">✅ Bon</SelectItem>
+                        </Select>
 
-                    <Textarea
-                        label="Comment"
-                        className="w-full"
-                        value={opinion.opinionComment}
-                        onChange={(e) => handleOpinionChange(index, "opinionComment", e.target.value)}
-                    />
-                </div>
+                        <Textarea
+                            label="Commentaire"
+                            className="w-full"
+                            value={opinion.opinionComment}
+                            onChange={(e) => handleOpinionChange(index, "opinionComment", e.target.value)}
+                        />
+                    </div>
+                </AccordionItem>
             ))}
-        </div>
+        </Accordion>
     );
 };
 
