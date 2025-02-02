@@ -76,10 +76,9 @@ const DailyList: FC = () => {
             {rows.map((row, index) => (
                 <Card key={index}>
                     <CardBody>
-                        <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+                        <div className="flex w-full flex-wrap md:flex-nowrap items-center gap-4">
                             <Input
                                 label="Name"
-                                labelPlacement="outside"
                                 isClearable
                                 type="text"
                                 value={row.name}
@@ -106,7 +105,7 @@ const DailyList: FC = () => {
                                 onChange={(e) => handleChange(index, "today", e)}
                             />
 
-                            <div className="flex flex-col justify-between">
+                            <div className="flex flex-col gap-4">
                                 <Button
                                     isIconOnly
                                     aria-label="Add Row"
@@ -120,7 +119,7 @@ const DailyList: FC = () => {
                                 <Button
                                     isIconOnly
                                     aria-label="Remove Row"
-                                    color={rows.length === 1 ? "secondary" : "danger"}
+                                    color={rows.length === 1 ? "default" : "danger"}
                                     fullWidth={true}
                                     disabled={rows.length === 1}
                                     onPress={() => handleRemoveRow(index)}
