@@ -1,5 +1,5 @@
 export const siteConfig = {
-    name: "Briefly",
+    name: "Reportify",
     description: "Make reporting great again.",
     navItems: [
         {

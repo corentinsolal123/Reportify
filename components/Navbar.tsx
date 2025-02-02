@@ -22,7 +22,7 @@ import {siteConfig} from "../config/site";
 import {ThemeSwitch} from "./Theme-switch";
 import {GithubIcon, SearchIcon, Logo} from "../components/Icons";
 
-const BRAND_NAME = "Briefly";
+const BRAND_NAME = "Reportify";
 
 export const Navbar = () => {
     const searchInput = (
