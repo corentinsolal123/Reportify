@@ -19,7 +19,7 @@ import NextLink from "next/link";
 import clsx from "clsx";
 
 import {siteConfig} from "../config/site";
-import {ThemeSwitch} from "../components/Theme-switch";
+import {ThemeSwitch} from "./Theme-switch";
 import {GithubIcon, SearchIcon, Logo} from "../components/Icons";
 
 const BRAND_NAME = "Briefly";
