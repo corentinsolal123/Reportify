@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Briefly.iml" filepath="$PROJECT_DIR$/.idea/Briefly.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Reportify.iml" filepath="$PROJECT_DIR$/.idea/Reportify.iml" />
     </modules>
   </component>
 </project>
