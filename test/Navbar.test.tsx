@@ -11,7 +11,7 @@ vi.mock("next/link", () => ({
 test("affiche le logo et le nom du site", () => {
     render(<Navbar />);
 
-    expect(screen.getByText(/CR_Maker/i)).toBeInTheDocument();
+    expect(screen.getByText(/Reportify/i)).toBeInTheDocument();
 });
 
 test("affiche les liens de navigation", () => {
