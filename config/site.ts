@@ -22,7 +22,7 @@ export const siteConfig = {
         }
     ],
     links: {
-        github: "https://github.com/corentinsolal123/Briefly",
+        github: "https://github.com/corentinsolal123/Reportify",
         new_cr: "/"
     }
 };

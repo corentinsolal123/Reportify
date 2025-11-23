@@ -1,11 +1,6 @@
 import React, { FC } from "react";
 import { Select, SelectItem, Textarea } from "@heroui/react";
-
-interface Opinion {
-    opinionResult: "" | "mauvais" | "a ameliorer" | "bon";
-    opinionContext: string;
-    opinionComment: string;
-}
+import { Opinion, OpinionColor, OPINION_COLOR_MAP } from "@/types";
 
 interface WeeklyOpinionListProps {
     opinions: Opinion[];
@@ -22,15 +17,8 @@ const WeeklyOpinionList: FC<WeeklyOpinionListProps> = ({ opinions, setOpinions }
         setOpinions(updatedOpinions);
     };
 
-    // 🎨 Fonction pour obtenir la couleur correcte
-    const getColorForOpinion = (opinion: "" | "mauvais" | "a ameliorer" | "bon"): "default" | "primary" | "secondary" | "success" | "warning" | "danger" => {
-        // @ts-ignore
-        return {
-            "mauvais": "danger",
-            "a ameliorer": "warning",
-            "bon": "success",
-            "": "default"
-        }[opinion];
+    const getColorForOpinion = (opinion: Opinion["opinionResult"]): OpinionColor => {
+        return OPINION_COLOR_MAP[opinion];
     };
 
     return (

@@ -1,11 +1,7 @@
 import React, { FC } from "react";
 import { Card, CardBody, Input, Textarea, Button } from "@heroui/react";
 import { PlusIcon, MinusIcon } from "@/components/Icons";
-
-interface Task {
-    taskName: string;
-    taskObservation: string;
-}
+import { Task } from "@/types";
 
 interface WeeklyTaskListProps {
     tasks: Task[];

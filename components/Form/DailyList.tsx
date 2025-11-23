@@ -1,12 +1,8 @@
 import React, { useState, FC, ChangeEvent } from "react";
 import { Card, CardBody, Input, Textarea, Button, Divider } from "@heroui/react";
 import { MinusIcon, PlusIcon } from "@/components/Icons";
-
-interface DailyRowData {
-    name: string;
-    yesterday: string;
-    today: string;
-}
+import { DailyRowData } from "@/types";
+import { showSuccess, showError } from "@/lib/toast";
 
 const DailyList: FC = () => {
     const [rows, setRows] = useState<DailyRowData[]>([
@@ -45,7 +41,7 @@ const DailyList: FC = () => {
         // On récupère le code HTML du tableau
         const tableElement = document.getElementById("generatedTable");
         if (!tableElement) {
-            alert("Tableau introuvable !");
+            showError("Tableau introuvable !");
             return;
         }
         const htmlContent = tableElement.outerHTML;
@@ -56,10 +52,10 @@ const DailyList: FC = () => {
             // Création d'un ClipboardItem pour le contenu HTML
             const clipboardItem = new ClipboardItem({ "text/html": blob });
             await navigator.clipboard.write([clipboardItem]);
-            alert("Le tableau a été copié dans le presse-papiers !");
+            showSuccess("Le tableau a été copié dans le presse-papiers !");
         } catch (error) {
             console.error("Erreur lors de la copie : ", error);
-            alert("Impossible de copier le tableau.");
+            showError("Impossible de copier le tableau. Vérifiez les permissions de votre navigateur.");
         }
     };
 
