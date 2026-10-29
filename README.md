@@ -10,6 +10,7 @@ Reportify est une application web moderne pour simplifier la création de rappor
 - 📅 **Rapports hebdomadaires** : tâches, observations et évaluation d'une personne
 - 👀 **Aperçu en direct** : l'email s'affiche tel qu'il sera collé
 - 📋 **Copie en un clic** : HTML (tableau dans Outlook) + texte brut en repli
+- ✉️ **Ouverture d'Outlook** : copie le rapport et ouvre un nouvel email vierge
 - 💾 **Brouillon automatique** : la saisie est conservée dans le navigateur (localStorage)
 - 🌓 **Thème clair / sombre** : suit le système, basculable depuis la navigation
 
@@ -65,7 +66,7 @@ Reportify/
 
 1. Choisissez **Daily** ou **Weekly** depuis l'accueil ou la navigation
 2. Remplissez le formulaire : l'aperçu se met à jour en direct
-3. Cliquez sur **Copier pour Outlook** puis collez dans votre email
+3. Cliquez sur **Ouvrir dans Outlook** : le rapport est copié et un nouvel email s'ouvre dans votre messagerie par défaut, il ne reste qu'à coller (Ctrl/Cmd + V). **Copier** copie seulement le rapport
 4. **Réinitialiser** vide le formulaire (annulable depuis la notification)
 
 Les anciennes URLs `/Form/Daily` et `/Form/Weekly` redirigent vers `/daily` et `/weekly`.
