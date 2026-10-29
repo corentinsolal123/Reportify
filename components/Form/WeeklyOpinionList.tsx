@@ -1,55 +1,70 @@
-import React, { FC } from "react";
-import { Select, SelectItem, Textarea } from "@heroui/react";
-import { Opinion, OpinionColor, OPINION_COLOR_MAP } from "@/types";
+"use client";
+
+import { Label, ListBox, Select, TextArea, TextField } from "@heroui/react";
+
+import { OPINION_LABELS, type Opinion, type OpinionResult } from "@/types";
 
 interface WeeklyOpinionListProps {
-    opinions: Opinion[];
-    setOpinions: (opinions: Opinion[]) => void;
+  opinions: Opinion[];
+  onChange: (opinions: Opinion[]) => void;
 }
 
-const WeeklyOpinionList: FC<WeeklyOpinionListProps> = ({ opinions, setOpinions }) => {
-    const handleOpinionChange = (index: number, field: keyof Opinion, value: string) => {
-        const updatedOpinions = [...opinions];
-        updatedOpinions[index] = {
-            ...updatedOpinions[index],
-            [field]: value
-        };
-        setOpinions(updatedOpinions);
-    };
-
-    const getColorForOpinion = (opinion: Opinion["opinionResult"]): OpinionColor => {
-        return OPINION_COLOR_MAP[opinion];
-    };
-
-    return (
-        <div className="space-y-2 w-full">
-            <h2>Opinions</h2>
-            {opinions.map((opinion, index) => (
-                <div key={opinion.opinionContext} className="flex flex-row items-center gap-4 w-full">
-                    <Select
-                        label={opinion.opinionContext}
-                        className="w-full md:max-w-xs"
-                        color={getColorForOpinion(opinion.opinionResult)} // ✅ Applique la bonne couleur
-                        value={opinion.opinionResult}
-                        onChange={(e) =>
-                            handleOpinionChange(index, "opinionResult", e.target.value as "mauvais" | "a ameliorer" | "bon")
-                        }
-                    >
-                        <SelectItem key="mauvais" value="mauvais">❌ Mauvais</SelectItem>
-                        <SelectItem key="a ameliorer" value="a ameliorer">⚠️ A ameliorer</SelectItem>
-                        <SelectItem key="bon" value="bon">✅ Bon</SelectItem>
-                    </Select>
-
-                    <Textarea
-                        label="Comment"
-                        className="w-full"
-                        value={opinion.opinionComment}
-                        onChange={(e) => handleOpinionChange(index, "opinionComment", e.target.value)}
-                    />
-                </div>
-            ))}
-        </div>
-    );
+const OPINION_ICONS: Record<Exclude<OpinionResult, "">, string> = {
+  mauvais: "❌",
+  "a ameliorer": "⚠️",
+  bon: "✅",
 };
 
-export default WeeklyOpinionList;
+const OPTIONS = Object.entries(OPINION_LABELS) as [Exclude<OpinionResult, "">, string][];
+
+export const WeeklyOpinionList = ({ opinions, onChange }: WeeklyOpinionListProps) => {
+  const updateOpinion = (index: number, patch: Partial<Opinion>) => {
+    onChange(opinions.map((opinion, i) => (i === index ? { ...opinion, ...patch } : opinion)));
+  };
+
+  return (
+    <div className="flex flex-col gap-4">
+      {opinions.map((opinion, index) => (
+        <div
+          key={opinion.opinionContext}
+          className="grid gap-3 rounded-2xl border border-separator p-4 sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)]"
+        >
+          <Select
+            fullWidth
+            placeholder="Évaluer…"
+            value={opinion.opinionResult || null}
+            variant="secondary"
+            onChange={(value) =>
+              updateOpinion(index, { opinionResult: (value as OpinionResult | null) ?? "" })
+            }
+          >
+            <Label>{opinion.opinionContext}</Label>
+            <Select.Trigger>
+              <Select.Value />
+              <Select.Indicator />
+            </Select.Trigger>
+            <Select.Popover>
+              <ListBox>
+                {OPTIONS.map(([id, label]) => (
+                  <ListBox.Item key={id} id={id} textValue={label}>
+                    {OPINION_ICONS[id]} {label}
+                    <ListBox.ItemIndicator />
+                  </ListBox.Item>
+                ))}
+              </ListBox>
+            </Select.Popover>
+          </Select>
+          <TextField
+            fullWidth
+            value={opinion.opinionComment}
+            variant="secondary"
+            onChange={(value) => updateOpinion(index, { opinionComment: value })}
+          >
+            <Label>Commentaire</Label>
+            <TextArea placeholder="Précisez votre avis…" rows={2} />
+          </TextField>
+        </div>
+      ))}
+    </div>
+  );
+};

@@ -1,10 +1,6 @@
-"use client";
-
-export const Footer = () => {
-    return (
-        <footer className="w-full flex items-center justify-center py-3">
-            <span className="text-default-600 mr-1">Powered by</span>
-            <p className="text-primary"> CSLEnterprise</p>
-        </footer>
-    );
-};
+export const Footer = () => (
+  <footer className="flex w-full items-center justify-center gap-1 py-6 text-sm">
+    <span className="text-muted">Powered by</span>
+    <span className="font-medium text-accent">CSLEnterprise</span>
+  </footer>
+);
