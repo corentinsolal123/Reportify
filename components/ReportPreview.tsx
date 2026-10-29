@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRotateLeft, Check, Copy } from "@gravity-ui/icons";
+import { ArrowRotateLeft, Check, Copy, Envelope } from "@gravity-ui/icons";
 import { Button, Card, toast } from "@heroui/react";
 import { useEffect, useState } from "react";
 
@@ -13,6 +13,11 @@ interface ReportPreviewProps {
   emptyMessage?: string;
   onReset: () => void;
 }
+
+const showCopyError = () =>
+  toast.danger("Impossible de copier le rapport", {
+    description: "Vérifiez les permissions du presse-papiers de votre navigateur.",
+  });
 
 export const ReportPreview = ({
   report,
@@ -37,10 +42,25 @@ export const ReportPreview = ({
         description: "Collez-le directement dans votre email (Ctrl/Cmd + V).",
       });
     } catch {
-      toast.danger("Impossible de copier le rapport", {
-        description: "Vérifiez les permissions du presse-papiers de votre navigateur.",
-      });
+      showCopyError();
     }
+  };
+
+  // Copies the report, then opens a blank email in the default mail app (Outlook):
+  // a mailto: body can only be plain text, so the formatted table is pasted instead.
+  const handleOpenMail = async () => {
+    try {
+      await copyReport(report);
+    } catch {
+      showCopyError();
+
+      return;
+    }
+    toast.success("Rapport copié", {
+      description: "Collez-le dans le nouvel email (Ctrl/Cmd + V).",
+      timeout: 10000,
+    });
+    window.location.href = "mailto:";
   };
 
   return (
@@ -63,9 +83,13 @@ export const ReportPreview = ({
       </Card.Content>
 
       <Card.Footer className="flex flex-wrap gap-2">
-        <Button className="flex-1" isDisabled={isEmpty} onPress={handleCopy}>
+        <Button className="flex-1" isDisabled={isEmpty} onPress={handleOpenMail}>
+          <Envelope />
+          Ouvrir dans Outlook
+        </Button>
+        <Button isDisabled={isEmpty} variant="secondary" onPress={handleCopy}>
           {isCopied ? <Check /> : <Copy />}
-          {isCopied ? "Copié !" : "Copier pour Outlook"}
+          {isCopied ? "Copié !" : "Copier"}
         </Button>
         <Button variant="tertiary" onPress={onReset}>
           <ArrowRotateLeft />
