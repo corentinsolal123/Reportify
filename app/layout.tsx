@@ -1,7 +1,8 @@
 import "@/styles/globals.css";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
+
 import clsx from "clsx";
-import { Toaster } from "react-hot-toast";
 
 import { Providers } from "./providers";
 
@@ -13,7 +14,7 @@ import { Footer } from "@/components/Footer";
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
+    template: `%s · ${siteConfig.name}`,
   },
   description: siteConfig.description,
   icons: {
@@ -28,29 +29,23 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html suppressHydrationWarning lang="en">
-      <head />
+    <html suppressHydrationWarning lang="fr">
       <body
         className={clsx(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans text-foreground antialiased",
           fontSans.variable,
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col h-screen">
+        <Providers>
+          <div className="flex min-h-screen flex-col">
             <Navbar />
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+            <main className="mx-auto w-full max-w-6xl flex-grow px-4 py-10 sm:px-6">
               {children}
             </main>
             <Footer />
           </div>
-          <Toaster />
         </Providers>
       </body>
     </html>

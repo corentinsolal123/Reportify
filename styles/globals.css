@@ -1,3 +1,20 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "@heroui/styles";
+
+/* `dark:` follows the class set by next-themes instead of the OS preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  /* Violet accent, in line with the Reportify brand. */
+  --accent: oklch(0.55 0.22 293);
+  --accent-foreground: oklch(0.99 0 0);
+}
+
+.dark {
+  --accent: oklch(0.68 0.19 293);
+  --accent-foreground: oklch(0.15 0.02 293);
+}

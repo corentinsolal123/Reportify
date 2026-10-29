@@ -1,36 +1,40 @@
 {
-    "name": "next-app-template",
-    "version": "0.1.0",
+    "name": "reportify",
+    "version": "0.2.0",
     "private": true,
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "start": "next start"
+        "start": "next start",
+        "typecheck": "tsc --noEmit",
+        "format": "prettier --write ."
     },
     "dependencies": {
-        "@heroui/react": "2.6.14",
-        "@react-aria/ssr": "3.9.7",
-        "@react-aria/visually-hidden": "3.8.19",
+        "@gravity-ui/icons": "2.23.0",
+        "@heroui/react": "3.2.7",
+        "@heroui/styles": "3.2.7",
+        "@internationalized/date": "3.12.4",
+        "@react-aria/ssr": "3.10.1",
+        "@react-aria/utils": "3.34.1",
         "clsx": "2.1.1",
-        "framer-motion": "12.0.11",
-        "intl-messageformat": "^10.5.0",
-        "isomorphic-dompurify": "^2.33.0",
-        "next": "15.1.12",
-        "next-themes": "^0.4.4",
-        "react": "19.0.9",
-        "react-dom": "19.0.9",
-        "react-hot-toast": "^2.6.0"
+        "next": "16.4.3",
+        "next-themes": "0.4.6",
+        "react": "19.3.1",
+        "react-aria": "3.53.1",
+        "react-aria-components": "1.22.1",
+        "react-dom": "19.3.1"
     },
     "devDependencies": {
-        "@react-types/shared": "3.27.0",
-        "@types/node": "22.13.1",
-        "@types/react": "19.0.8",
-        "@types/react-dom": "19.0.3",
-        "autoprefixer": "10.4.20",
-        "postcss": "8.5.1",
-        "prettier": "3.4.2",
-        "tailwind-variants": "0.3.1",
-        "tailwindcss": "3.4.17",
-        "typescript": "5.7.3"
+        "@tailwindcss/postcss": "4.3.3",
+        "@types/node": "26.6.6",
+        "@types/react": "19.3.0",
+        "@types/react-dom": "19.3.0",
+        "postcss": "8.5.32",
+        "prettier": "3.9.10",
+        "tailwindcss": "4.3.3",
+        "typescript": "7.0.2"
+    },
+    "engines": {
+        "node": ">=20.9.0"
     }
 }
